@@ -42,7 +42,7 @@
 
     var w = 500;
     var h = 300;
-    var padding = 20
+    var padding = 30
 
     var scale = d3.scale.linear();
     scale.domain([100, 500])
@@ -65,6 +65,17 @@
         return d[1]
       })])
       .range([2,5])
+
+    var xAxis = d3.svg.axis()
+      .scale(xScale)
+      .orient("bottom")
+      .ticks(5)
+
+    var yAxis = d3.svg.axis()
+      .scale(yScale)
+      .orient("left")
+      .ticks(5)
+
 
     var svg = d3.select("body")
       .append("svg")
@@ -102,7 +113,15 @@
       .attr("font-size", "11px")
       .attr("fill", "red");
 
+      svg.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate(0, " + (h-padding) + ")")
+        .call(xAxis)
 
+      svg.append("g")
+        .attr('class', 'axis')
+        .attr("transform", "translate(" + padding + ", 0)")
+        .call(yAxis)
 
 
 
